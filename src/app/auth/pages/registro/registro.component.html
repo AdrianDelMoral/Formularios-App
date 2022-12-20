@@ -1,0 +1,117 @@
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form autocomplete="off"
+            [formGroup]="registroForm"
+            (ngSubmit)="submitFormulario()">
+            <!-- Nombre -->
+            <div class="row mb-3">
+                <label class="col-sm col-form-label">Nombre</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                        class="form-control"
+                        formControlName="nombre"
+                        placeholder="Nombre del Usuario">
+                    <span class="form-text text-danger"
+                        *ngIf="campoNoValido('nombre')">
+                        Debe de ser en formato de Nombre y Apellido
+                    </span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row mb-3">
+                <label class="col-sm col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email"
+                        class="form-control"
+                        formControlName="email"
+                        placeholder="Email del Usuario">
+                    <span class="form-text text-danger"
+                        *ngIf="campoNoValido('email')">
+                        {{ emailErrorMsg }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Username -->
+            <div class="row mb-3">
+                <label class="col-sm col-form-label">Apodo</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                        class="form-control"
+                        formControlName="username"
+                        placeholder="Nombre código del Usuario">
+                    <span class="form-text text-danger"
+                        *ngIf="campoNoValido('username')">
+                        El Username no puede ser 'Strider'
+                    </span>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="row mb-3">
+                <label class="col-sm col-form-label">Contraseña</label>
+                <div class="col-sm-10">
+                    <input type="password"
+                        class="form-control"
+                        formControlName="password"
+                        placeholder="Contraseña de su Cuenta">
+
+                    <span class="form-text text-danger"
+                        *ngIf="campoNoValido('password')">
+                        La constraseña debe ser mayor de 8 caracteres
+                    </span>
+                </div>
+            </div>
+
+            <!-- Password2 -->
+            <div class="row mb-3">
+                <label class="col-sm col-form-label">Repetir Contraseña</label>
+                <div class="col-sm-10">
+                    <input type="password"
+                        class="form-control"
+                        formControlName="password2"
+                        placeholder="Confirmar la Contraseña">
+                    <span class="form-text text-danger"
+                        *ngIf="campoNoValido('password2')">
+                        Las contrasñas deben de ser iguales
+                    </span>
+                </div>
+            </div>
+
+            <!-- Botón Crear -->
+            <div class="row mb-3">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                        [disabled]="registroForm.valid"
+                        type="submit">Crear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<h2>Form Valid: {{ registroForm.valid }}</h2>
+<h2>Form Status: {{ registroForm.status }}</h2>
+<h2>Form Pending: {{ registroForm.pending}}</h2>
+
+<h2>Form Errors:</h2>
+<pre> {{ registroForm.errors | json}}</pre>
+
+<h5>Nombre</h5>
+<pre>{{ registroForm.controls['nombre'].errors | json }}</pre>
+
+<h5>Email</h5>
+<pre>{{ registroForm.controls['email'].errors | json }}</pre>
+
+<h5>Username</h5>
+<pre>{{ registroForm.controls['username'].errors | json }}</pre>
+
+<h5>Password</h5>
+<pre>{{ registroForm.controls['password'].errors | json }}</pre>
+
+<h5>Confirmar</h5>
+<pre>{{ registroForm.controls['password2'].errors | json }}</pre>
